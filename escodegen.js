@@ -748,8 +748,13 @@
                     result.push(generateComment(comment));
                 }
             } else {
-                tailingToStatement = !endsWithLineTerminator(toSourceNodeWhenNeeded(result).toString());
+                tailingToStatement = stmt.sameLine;
+                if (tailingToStatement === undefined) {
+                    tailingToStatement = !endsWithLineTerminator(toSourceNodeWhenNeeded(result).toString());
+                }
+                // tailToStatement should always put a single space
                 specialBase = stringRepeat(' ', calculateSpaces(toSourceNodeWhenNeeded([base, result, indent]).toString()));
+                // specialBase = ' ';
                 for (i = 0, len = stmt.trailingComments.length; i < len; ++i) {
                     comment = stmt.trailingComments[i];
                     if (tailingToStatement) {
@@ -799,9 +804,12 @@
 
             if (stmt.padding.top) {
                 result.push((new Array(stmt.padding.top+1)).join(newline));
+                // Add indent if there is leading padding
+                result.push(addIndent(save));
+            } else {
+                // By default, let the generator handle adding indenting (escodegen:1108)
+                result.push(save);
             }
-
-            result.push(addIndent(save));
 
             if (stmt.padding.bottom) {
                 result.push((new Array(stmt.padding.bottom+1)).join(newline));
@@ -1735,7 +1743,9 @@
 
                 fragment = addIndent(this.generateStatement(stmt.body[i], bodyFlags));
                 result.push(fragment);
-                if (i + 1 < iz && !endsWithLineTerminator(toSourceNodeWhenNeeded(fragment).toString())) {
+                // TODO: remove check for endsWithLineTerminator so that padding values go through as expected
+                // !endsWithLineTerminator(toSourceNodeWhenNeeded(fragment).toString())
+                if (i + 1 < iz) {
                     if (preserveBlankLines) {
                         if (!stmt.body[i + 1].leadingComments) {
                             result.push(newline);
