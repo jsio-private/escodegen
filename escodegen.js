@@ -1111,7 +1111,9 @@
                     }
 
                     result.push(fragment);
-                    if (!endsWithLineTerminator(toSourceNodeWhenNeeded(fragment).toString())) {
+                    // TODO: padding compat
+                    // !endsWithLineTerminator(toSourceNodeWhenNeeded(fragment).toString())
+                    if (true) {
                         if (preserveBlankLines && i < iz - 1) {
                             // don't add a new line if there are leading coments
                             // in the next statement
@@ -1167,7 +1169,9 @@
                 }
             });
 
-            if (!endsWithLineTerminator(toSourceNodeWhenNeeded(result).toString())) {
+            // TODO: padding compat
+            // !endsWithLineTerminator(toSourceNodeWhenNeeded(result).toString())
+            if (true) {
                 result.push(newline);
             }
             result.push(base);
@@ -1283,7 +1287,9 @@
                             }
                         }
                     });
-                    if (!endsWithLineTerminator(toSourceNodeWhenNeeded(result).toString())) {
+                    // TODO: padding compat
+                    // !endsWithLineTerminator(toSourceNodeWhenNeeded(result).toString())
+                    if (true) {
                         result.push(newline);
                     }
                     result.push(base + '}');
@@ -1445,7 +1451,9 @@
                                 }
                             }
                         });
-                        if (!endsWithLineTerminator(toSourceNodeWhenNeeded(result).toString())) {
+                        // TODO: padding compat
+                        // !endsWithLineTerminator(toSourceNodeWhenNeeded(result).toString())
+                        if (true) {
                             result.push(newline);
                         }
                         result.push(base + '}' + space);
@@ -1590,7 +1598,9 @@
                     }
                     fragment = addIndent(this.generateStatement(stmt.cases[i], bodyFlags));
                     result.push(fragment);
-                    if (!endsWithLineTerminator(toSourceNodeWhenNeeded(fragment).toString())) {
+                    // TODO: padding compat
+                    // !endsWithLineTerminator(toSourceNodeWhenNeeded(fragment).toString())
+                    if (true) {
                         result.push(newline);
                     }
                 }
@@ -1619,7 +1629,9 @@
                     i = 1;
                 }
 
-                if (i !== iz && !endsWithLineTerminator(toSourceNodeWhenNeeded(result).toString())) {
+                // TODO: padding compat
+                //  && !endsWithLineTerminator(toSourceNodeWhenNeeded(result).toString())
+                if (i !== iz) {
                     result.push(newline);
                 }
 
@@ -1630,7 +1642,9 @@
                     }
                     fragment = addIndent(that.generateStatement(stmt.consequent[i], bodyFlags));
                     result.push(fragment);
-                    if (i + 1 !== iz && !endsWithLineTerminator(toSourceNodeWhenNeeded(fragment).toString())) {
+                    // TODO: padding compat
+                    // && !endsWithLineTerminator(toSourceNodeWhenNeeded(fragment).toString())
+                    if (i + 1 !== iz) {
                         result.push(newline);
                     }
                 }
@@ -2111,7 +2125,9 @@
                     }
                 }
             });
-            if (multiline && !endsWithLineTerminator(toSourceNodeWhenNeeded(result).toString())) {
+            // TODO: remove for padding support
+            // && !endsWithLineTerminator(toSourceNodeWhenNeeded(result).toString())
+            if (multiline) {
                 result.push(newline);
             }
             result.push(multiline ? base : '');
@@ -2230,7 +2246,9 @@
                 }
             });
 
-            if (!endsWithLineTerminator(toSourceNodeWhenNeeded(result).toString())) {
+            // TODO: padding compat
+            // !endsWithLineTerminator(toSourceNodeWhenNeeded(result).toString())
+            if (true) {
                 result.push(newline);
             }
             result.push(base);
@@ -2276,7 +2294,9 @@
                 }
             });
 
-            if (multiline && !endsWithLineTerminator(toSourceNodeWhenNeeded(result).toString())) {
+            // TODO: padding compat
+            // && !endsWithLineTerminator(toSourceNodeWhenNeeded(result).toString())
+            if (multiline) {
                 result.push(newline);
             }
             result.push(multiline ? base : '');
